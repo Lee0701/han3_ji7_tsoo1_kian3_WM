@@ -37,22 +37,23 @@ public class IDSrendServlet extends HttpServlet
 {
 	/** 序列化編號 */
 	private static final long serialVersionUID = 1224634082415129183L;
-	/** 組宋體用的工具 */
+	/** 組宋體用的工具 / The Tool for compositing Song font .	*/
 	protected IDSrendService 宋體組字工具;
-	/** 組宋體粗體用的工具 */
+	/** 組宋體粗體用的工具 / The Tool for compositing bold Song font . */
 	protected IDSrendService 粗宋組字工具;
-	/** 組楷體用的工具 */
+	/** 組楷體用的工具 / The Tool for compositing Kai font .*/
 	protected IDSrendService 楷體組字工具;
-	/** 組楷體粗體用的工具 */
+	/** 組楷體粗體用的工具 / The Tool for compositing Kai bold font .*/
 	protected IDSrendService 粗楷組字工具;
 
 	/** 產生圖形傳予組字介面畫。毋過無X11、圖形介面就袂使用 */
 	// GraphicsConfiguration 系統圖畫設定;
 	/** 佮資料庫的連線 */
-	protected PgsqlConnection 連線;
+	protected PgsqlConnection 連線;//連線 means connetcion
+
 
 	/** 組字出來的字型解析度 */
-	int 字型大細;
+	int 字型大細; // 字型大細 means font resolution
 
 	/** 建立一个組字的服務。 */
 	public IDSrendServlet()
