@@ -62,21 +62,21 @@ public class IDSrendServlet extends HttpServlet
 		// 系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
 		// .getDefaultScreenDevice().getDefaultConfiguration();
 
-		連線 = new PgsqlConnection();
+		連線 = new PgsqlConnection();//連線	means connection
 		// TODO 換專門查的使用者，換讀取權限
 		
-		ExpSequenceLookup 查詢方式 = new ExpSequenceLookup_byDB(連線);
+		ExpSequenceLookup 查詢方式 = new ExpSequenceLookup_byDB(連線);//查詢方式 means loopup method,連線=connection	
 		// TODO ExpSequenceLookup_byDB(連線) ExpSequenceNoLookup()
-		IDSnormalizer 正規化工具 = new IDSnormalizer();
-		MergePieceAdjuster 調整工具 = new MergePieceAdjuster(
+		IDSnormalizer 正規化工具 = new IDSnormalizer();//正規化工具= IDS normalizer
+		MergePieceAdjuster 調整工具 = new MergePieceAdjuster( //調整工具 means tunning tool.
 		// new FunctinoalBasicBolder(new Stroke[] {}, 01),
 				1e-1, 5);
 		CommonFontNoSearch 展開式查通用字型編號工具 = new CommonFontNoSearchbyDB(連線);
 		// TODO CommonFontNoSearchbyDB(連線) NonLookingupCommonFontNo()
 		
-		int 粗字型屬性 = Font.BOLD;
-		int 普通字型屬性 = 0;
-		字型大細 = 200;
+		int 粗字型屬性 = Font.BOLD;//粗字型屬性 = bold font type property
+		int 普通字型屬性 = 0;//普通字型屬性 = normal font type property
+		字型大細 = 200;//字型大細 = font resolution
 		MkeSeparateMovableType_Bolder 活字加粗 = new MkeSeparateMovableType_Bolder(
 				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
 		ChineseCharacterTypeSetter 宋體設定工具 = new FontRefSettingTool(展開式查通用字型編號工具, FontCorrespondTable
