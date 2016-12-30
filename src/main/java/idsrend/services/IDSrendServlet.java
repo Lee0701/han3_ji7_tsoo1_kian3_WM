@@ -65,7 +65,7 @@ public class IDSrendServlet extends HttpServlet
 		連線 = new PgsqlConnection();//連線	means connection
 		// TODO 換專門查的使用者，換讀取權限
 		
-		ExpSequenceLookup 查詢方式 = new ExpSequenceLookup_byDB(連線);//查詢方式 means loopup method,連線=connection	
+		ExpSequenceLookup 查詢方式 = new ExpSequenceLookup_byDB(連線);//查詢方式 means loopup method,連線=connection
 		// TODO ExpSequenceLookup_byDB(連線) ExpSequenceNoLookup()
 		IDSnormalizer 正規化工具 = new IDSnormalizer();//正規化工具= IDS normalizer
 		MergePieceAdjuster 調整工具 = new MergePieceAdjuster( //調整工具 means tunning tool.
@@ -77,7 +77,7 @@ public class IDSrendServlet extends HttpServlet
 		int 粗字型屬性 = Font.BOLD;//粗字型屬性 = bold font type property
 		int 普通字型屬性 = 0;//普通字型屬性 = normal font type property
 		字型大細 = 200;//字型大細 = font resolution
-		MkeSeparateMovableType_Bolder 活字加粗 = new MkeSeparateMovableType_Bolder(
+		MkeSeparateMovableType_Bolder 活字加粗 = new MkeSeparateMovableType_Bolder(//活字加粗 = Make movable type bolder.
 				new FunctinoalBasicBolder(new Stroke[] {}, 01), 1e-1);
 		ChineseCharacterTypeSetter 宋體設定工具 = new FontRefSettingTool(展開式查通用字型編號工具, FontCorrespondTable
 				.提著吳守禮注音摻宋體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
