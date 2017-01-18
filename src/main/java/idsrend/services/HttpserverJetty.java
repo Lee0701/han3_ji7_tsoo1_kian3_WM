@@ -9,7 +9,7 @@ import org.eclipse.jetty.servlet.ServletHandler;
  * @author Ihc
  */
 /*e
- * I use Jetty as the mainframe end, to provide the service for ideograph sequencing.
+ * I use Jetty as the server side, to provide the service for ideograph sequencing.
  *
  * @author Ihc
  */
