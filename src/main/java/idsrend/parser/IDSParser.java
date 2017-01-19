@@ -18,11 +18,14 @@ import idsrend.charcomponent.NonFinalCharComponent;
 public class IDSParser
 {
 	/** 愛分析的統一碼控制碼陣列 */
+	/*e Unicode control code array for analysis */
 	protected int[] 統一碼控制碼;
 	/** 目前處理到的控制碼位置 */
+	/*e The position of the control code currently in processing */
 	protected int 陣列位置;
 	/** 查詢展開式的工具 */
-	ExpSequenceLookup 展開式查詢;
+	/*e The tool for querying decomposite sequence( an IDS, decomposed from an Unicode coded Han character.)*/
+	ExpSequenceLookup 展開式查詢; //e 展開式查詢 means decomposite sequence querying
 
 	/**
 	 * 用字串佮查詢工具初使化物件。
@@ -32,6 +35,10 @@ public class IDSParser
 	 * @param 展開式查詢
 	 *            查詢展開式的工具
 	 */
+	/*e
+	漢字字串 means Han character string
+	轉換成控制碼 means converting to control code
+	*/
 	public IDSParser(String 漢字字串, ExpSequenceLookup 展開式查詢)
 	{
 		this(String2ControlCode.轉換成控制碼(漢字字串), 展開式查詢);
@@ -57,14 +64,14 @@ public class IDSParser
 	 * 
 	 * @return 字串中全部的漢字部件。若字串格式有錯，不完整的部件不會被加上去，並且在陣列最後會補上一個null當作通知
 	 */
-	public Vector<CharComponent> 解析()
+	public Vector<CharComponent> 解析() //e 解析 means parsing
 	{
 		Vector<CharComponent> vector = new Vector<CharComponent>();
 		try
 		{
-			while (!組合式是毋是結束矣())
+			while (!組合式是毋是結束矣()) //e 組合式是毋是結束矣 means whether the sequence has finished
 			{
-				vector.add(解析一個組字式());
+				vector.add(解析一個組字式()); //e 解析一個組字式 means parsing an IDS
 			}
 		}
 		catch (IDSExecption e)
@@ -74,13 +81,18 @@ public class IDSParser
 		return vector;
 	}
 
-	public CharComponent 解析一個組字式() throws IDSExecption
+	public CharComponent 解析一個組字式() throws IDSExecption //e 解析一個組字式 means parsing an IDS
 	{
-		if (組合式是毋是結束矣())
+		if (組合式是毋是結束矣()) //e 組合式是毋是結束矣 means whether the sequence has finished
 			throw new IDSExecption();
 		CharComponent chineseCharacter = null;
 		if (CompositionMethods.isCombinationType(目前控制碼()))
 		{
+			/*e
+			目前控制碼 means current control code
+			下一个控制碼 means the next control code
+			底下元素 means elements in it
+			*/
 			FinalCharComponent chineseCharacterTzu = new FinalCharComponent(目前控制碼());
 			下一个控制碼();
 			for (int i = 0; i < chineseCharacterTzu.底下元素().length; ++i)
@@ -91,6 +103,13 @@ public class IDSParser
 		}
 		else
 		{
+			/*e
+			展開式 means decomposite sequence
+			展開式查詢 means decomposite sequence querying
+			分析工具 means analysis tool
+			避免把異體字給展開 means avoiding to decompose a variant Han character into sequence
+			解析一個組字式 means parsing an IDS
+			*/
 			String 展開式 = null;
 			展開式 = 展開式查詢.查詢展開式(目前控制碼());
 			if (展開式 == null)
@@ -110,18 +129,29 @@ public class IDSParser
 	 * 
 	 * @return 目前的控制碼
 	 */
+	/*e
+	Get current control code
+	*/
 	protected int 目前控制碼()
 	{
 		return 統一碼控制碼[陣列位置];
+		/*e 
+		統一碼控制碼 means Unicode control code
+		陣列位置 means array position
+		*/
 	}
 
 	/** 換到下一个控制碼。 */
-	protected void 下一个控制碼()
+	/*e
+	Switch to the next control code
+	*/
+	protected void 下一个控制碼() //e 下一个控制碼 means next control code
 	{
 		陣列位置++;
 		return;
 	}
 
+	//e 組合式是毋是結束矣 means whether the sequence has finished
 	protected boolean 組合式是毋是結束矣()
 	{
 		return 統一碼控制碼.length == 陣列位置;
