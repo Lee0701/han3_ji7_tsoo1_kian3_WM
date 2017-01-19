@@ -64,13 +64,13 @@ public class IDSrendServlet extends HttpServlet
         /*e Set up a  IDS rendering service.*/
 	public IDSrendServlet()
 	{
-		
+
 		// 系統圖畫設定 = GraphicsEnvironment.getLocalGraphicsEnvironment()
 		// .getDefaultScreenDevice().getDefaultConfiguration();
 
 		連線 = new PgsqlConnection(); //e 連線 means connection
 		// TODO 換專門查的使用者，換讀取權限
-		
+
 		ExpSequenceLookup 查詢方式 = new ExpSequenceLookup_byDB(連線); //e 查詢方式 means lookup method , 連線 means connection , Expsequence means a sequence(IDS) which is decomposed from a Unicode coded Han character
 		// TODO ExpSequenceLookup_byDB(連線) ExpSequenceNoLookup()
 		IDSnormalizer 正規化工具 = new IDSnormalizer(); //e 正規化工具mean  IDS normalizer
@@ -78,7 +78,7 @@ public class IDSrendServlet extends HttpServlet
 		// new FunctinoalBasicBolder(new Stroke[] {}, 01),
 				1e-1, 5);
 		CommonFontNoSearch 展開式查通用字型編號工具 = new CommonFontNoSearchbyDB(連線); //e 展開式查通用字型編號工具 means the tool usage is to query if the IDS already have an Unicode coded version?
-		// TODO CommonFontNoSearchbyDB(連線) NonLookingupCommonFontNo()		
+		// TODO CommonFontNoSearchbyDB(連線) NonLookingupCommonFontNo()
 		int 粗字型屬性 = Font.BOLD; //e 粗字型屬性 means bold font type property
 		int 普通字型屬性 = 0; //e 普通字型屬性 means normal font type property
 		字型大細 = 200; //e 字型大細 means font resolution
@@ -98,7 +98,7 @@ public class IDSrendServlet extends HttpServlet
 
 		宋體組字工具 = new IDSrendService(查詢方式, 正規化工具, 宋體設定工具, 調整工具, 活字加粗, 普通字型屬性, 字型大細);
 		/*e "宋體組字工具 = new......"
-		   means:		   
+		   means:
 		   SongFontCompositeTool = new IDSrendService(lookup_method, normalize_tool, SongFontsetting_tool, tunetool, movable_type_bolder, normal_font_parameter, font_resolution);
 		*/
 
@@ -116,7 +116,7 @@ public class IDSrendServlet extends HttpServlet
 
 		粗宋組字工具 = new IDSrendService(查詢方式, 正規化工具, 粗宋設定工具, 調整工具, 活字加粗, 粗字型屬性, 字型大細);
 		//e 粗宋組字工具 means bold Song font CompositeTool, others similar to  SongFontCompositeTool.
-		
+
 
 		ChineseCharacterTypeSetter 楷體設定工具 = new FontRefSettingTool(展開式查通用字型編號工具, FontCorrespondTable
 				.提著吳守禮注音摻楷體字體().調整字體參數(普通字型屬性, 字型大細), new FontRenderContext(
@@ -153,11 +153,11 @@ public class IDSrendServlet extends HttpServlet
 	{
 		response.setHeader("Cache-Control", "public, max-age=31536000");
 		response.setHeader("Server", "han3_ji7_tsoo1_kian3");
-		
+
 		//System.out.println("PathInfo="+request.getPathInfo());
 		String 網址字串 = URLDecoder.decode(request.getPathInfo(), "UTF-8")//在通用的應用程式用request.getRequestURI()會取到servlet path本身
 		    .substring(1); //e 網址字串 means url string,
-		if (是舊網址(網址字串))// TODO ==字體 ,  // "是舊網址" means isOldURL. 
+		if (是舊網址(網址字串))// TODO ==字體 ,  // "是舊網址" means isOldURL.
 		{
 			String[] 目錄 = 網址字串.split("/", 2);
 			String 新網址 = String.format("/%s?%s=%s",
@@ -178,7 +178,7 @@ public class IDSrendServlet extends HttpServlet
 		}
 		IDSrendService 組字工具 = 宋體組字工具; //e 組字工具 means composite tool, 宋體組字工具 means Song font composite tool.
 		//System.out.println("網址字串="+網址字串);
-		//System.out.println("輸入的uri="+request.getRequestURI());	
+		//System.out.println("輸入的uri="+request.getRequestURI());
 		//System.out.println("字體是"+request.getParameter("字體"));
 		String 字體 = request.getParameter("字體"); //e 字體 means font
 		switch (字體 != null ? 字體 : "")
@@ -203,11 +203,11 @@ public class IDSrendServlet extends HttpServlet
 		int 位置 = 網址字串.lastIndexOf('.'); //e 位置 means position
 		if (位置 == -1)
 			位置 = 網址字串.length();
-		
+
 		String 組字式 = 網址字串.substring(0, 位置);  //e 組字式 means IDS ,網址字串 = url string , 位置= position
 		System.out.println("組字式="+組字式);
-		
-		String 附檔名 = 網址字串.substring(位置 + 1); //e 附檔名 means Filename extension  
+
+		String 附檔名 = 網址字串.substring(位置 + 1); //e 附檔名 means Filename extension
 		if (附檔名.equals("svg"))
 		{
 			response.setHeader("Content-Type", "image/svg+xml;charset=utf-8");
