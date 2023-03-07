@@ -18,11 +18,11 @@ mainClassName = "idsrend.services.HttpserverJetty"
 
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
-        classpath 'com.bmuschko:gradle-tomcat-plugin:2.2.5'
+        classpath 'com.bmuschko:gradle-tomcat-plugin:2.5'
     }
 }
 
@@ -30,40 +30,32 @@ buildscript {
 repositories {
     // Use 'jcenter' for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    jcenter()
     mavenCentral()
 }
 
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-    compile 'org.slf4j:slf4j-api:1.7.21'
-    compile 'org.slf4j:slf4j-ext:1.7.21'
-    compile 'ch.qos.cal10n:cal10n-api:0.8.1'
-    compile group: 'org.apache.xmlgraphics', name: 'batik-util', version: '1.8'
-    compile group: 'org.apache.xmlgraphics', name: 'batik-svggen', version: '1.8'
-    compile group: 'org.apache.xmlgraphics', name: 'batik-dom', version: '1.8'
-    compile 'javax.servlet:javax.servlet-api:3.1.0'
-    compile group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.2.17.v20160517'
-    compile group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.2.17.v20160517'
+    implementation 'org.slf4j:slf4j-api:1.7.21'
+    implementation 'org.slf4j:slf4j-ext:1.7.21'
+    implementation 'ch.qos.cal10n:cal10n-api:0.8.1'
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-util', version: '1.8'
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-svggen', version: '1.8'
+    implementation group: 'org.apache.xmlgraphics', name: 'batik-dom', version: '1.8'
+    implementation 'javax.servlet:javax.servlet-api:3.1.0'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-servlet', version: '9.2.17.v20160517'
+    implementation group: 'org.eclipse.jetty', name: 'jetty-server', version: '9.2.17.v20160517'
 
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 
     def tomcatVersion = '7.0.52'
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}",
            "org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}"
-}
-
-
-war {
-    //from 'src/wwwroot'
-    webInf { from 'src/main/webapp/WEB-INF' }
-    webXml = file('src/main/webapp/WEB-INF/web.xml')    
 }
 
 jacocoTestReport {
