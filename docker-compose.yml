@@ -1,0 +1,7 @@
+services:
+  tomcat:
+    image: han3_ji7_tsoo1_kian3
+    build: .
+    ports:
+      - 8080:8080
+    restart: always
