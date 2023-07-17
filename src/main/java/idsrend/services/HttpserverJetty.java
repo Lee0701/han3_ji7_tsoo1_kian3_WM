@@ -25,7 +25,7 @@ public class HttpserverJetty
 
 		ServletHandler handler = new ServletHandler();
 		server.setHandler(handler);
-		handler.addServletWithMapping(IDSrendServlet.class, "/*");
+		handler.addServletWithMapping(IDSrendServlet.class.getName(), "/*");
 		boolean 遏袂啟動 = true;
 		while (遏袂啟動)
 		{
