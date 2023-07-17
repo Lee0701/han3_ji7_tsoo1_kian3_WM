@@ -5,4 +5,4 @@ COPY . .
 
 EXPOSE 8080
 
-CMD ["./gradlew", "tomcatRunWar"]
+CMD ["./gradlew", "run"]
