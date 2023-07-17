@@ -8,11 +8,6 @@ import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.ServletContext;
-
 import cc.ccomponent_adjuster.ExpSequenceLookup;
 import cc.ccomponent_adjuster.ExpSequenceLookup_byDB;
 import cc.char_indexingtool.ChineseCharacterTypeSetter;
@@ -25,6 +20,9 @@ import cc.stroke.FunctinoalBasicBolder;
 import cc.stroketool.MkeSeparateMovableType_Bolder;
 import cc.tool.database.PgsqlConnection;
 import idsrend.CharComponentStructureAdjuster.IDSnormalizer;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.lang.System;
 
@@ -118,7 +116,7 @@ public class IDSrendServlet extends HttpServlet
 	 * 檔案類型：<code>png</code>
 	 */
 	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws IOException
+						 HttpServletResponse response) throws IOException
 	{
 		response.setHeader("Cache-Control", "public, max-age=31536000");
 		response.setHeader("Server", "han3_ji7_tsoo1_kian3");
