@@ -5,6 +5,6 @@ COPY . .
 
 RUN ./gradlew assemble
 
-EXPOSE 8080
+EXPOSE 8060
 
 CMD ["./gradlew", "run"]
